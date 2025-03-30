@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آراء العملاء - متجر طارق</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e67e22;
+            --light-color: #f9f9f9;
+            --dark-color: #34495e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* قسم آراء العملاء */
+        .testimonials-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 1rem auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 1rem;
+            border: 2px solid var(--accent-color);
+        }
+
+        .user-info {
+            flex-grow: 1;
+        }
+
+        .user-name {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .user-location {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .rating {
+            color: #ffd700;
+            margin: 0.5rem 0;
+        }
+
+        .testimonial-text {
+            color: #444;
+            line-height: 1.8;
+        }
+
+        /* نموذج إضافة رأي */
+        .add-review {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .review-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+            direction: ltr;
+        }
+
+        .star-rating i {
+            cursor: pointer;
+            color: #ddd;
+            transition: all 0.3s;
+        }
+
+        .star-rating .active {
+            color: #ffd700;
+        }
+
+        .btn {
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #d35400;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>آراء عملائنا</h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <!-- آراء موجودة -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg" class="user-avatar" alt="محمد علي">
+                        <div class="user-info">
+                            <div class="user-name">رياض العتلة</div>
+                            <div class="user-location">الرياض، السعودية</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        أفضل تجربة شراء عبر الإنترنت! الدعم الفني كان سريعًا ومحترفًا، الموقع يعمل بكفاءة عالية.
+                    </p>
+                </div>
+
+                <!-- يمكن إضافة المزيد من الآراء هنا -->
+            </div>
+
+            <!-- نموذج إضافة رأي جديد -->
+            <div class="add-review">
+                <h3 style="text-align:center; margin-bottom:1.5rem;">أضف تقييمك</h3>
+                <form class="review-form" id="reviewForm">
+                    <div class="form-group">
+                        <label>اسمك الكريم:</label>
+                        <input type="text" class="form-control" id="userName" required>
+                        <span class="error-message" id="nameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>موقعك:</label>
+                        <input type="text" class="form-control" id="userLocation" placeholder="البلد/المدينة" required>
+                        <span class="error-message" id="locationError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>التقييم:</label>
+                        <div class="star-rating" id="starRating">
+                            <i class="far fa-star" data-rating="1"></i>
+                            <i class="far fa-star" data-rating="2"></i>
+                            <i class="far fa-star" data-rating="3"></i>
+                            <i class="far fa-star" data-rating="4"></i>
+                            <i class="far fa-star" data-rating="5"></i>
+                        </div>
+                        <input type="hidden" id="selectedRating" value="0">
+                        <span class="error-message" id="ratingError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>تعليقك:</label>
+                        <textarea class="form-control" id="userReview" rows="4" required></textarea>
+                        <span class="error-message" id="reviewError"></span>
+                    </div>
+
+                    <button type="submit" class="btn">نشر التقييم</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // نظام التقييم بالنجوم
+        const stars = document.querySelectorAll('#starRating i');
+        let currentRating = 0;
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = parseInt(star.dataset.rating);
+                currentRating = rating;
+                document.getElementById('selectedRating').value = rating;
+                
+                stars.forEach((s, index) => {
+                    s.classList.toggle('active', index < rating);
+                    s.classList.toggle('far', index >= rating);
+                    s.classList.toggle('fas', index < rating);
+                });
+            });
+        });
+
+        // إرسال النموذج
+        document.getElementById('reviewForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const userName = document.getElementById('userName').value;
+            const userLocation = document.getElementById('userLocation').value;
+            const userReview = document.getElementById('userReview').value;
+            const rating = document.getElementById('selectedRating').value;
+
+            // التحقق من البيانات
+            let isValid = true;
+            
+            if (userName.trim() === '') {
+                showError('nameError', 'الرجاء إدخال الاسم');
+                isValid = false;
+            }
+            
+            if (userLocation.trim() === '') {
+                showError('locationError', 'الرجاء إدخال الموقع');
+                isValid = false;
+            }
+            
+            if (rating === '0') {
+                showError('ratingError', 'الرجاء اختيار التقييم');
+                isValid = false;
+            }
+            
+            if (userReview.trim().length < 20) {
+                showError('reviewError', 'التعليق يجب أن يحتوي على الأقل 20 حرفًا');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                addNewTestimonial(userName, userLocation, rating, userReview);
+                clearForm();
+            }
+        });
+
+        // إضافة التقييم الجديد
+        function addNewTestimonial(name, location, rating, text) {
+            const testimonialsGrid = document.querySelector('.testimonials-grid');
+            
+            const newTestimonial = document.createElement('div');
+            newTestimonial.className = 'testimonial-card';
+            newTestimonial.innerHTML = `
+                <div class="testimonial-header">
+                    <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random" class="user-avatar" alt="${name}">
+                    <div class="user-info">
+                        <div class="user-name">${name}</div>
+                        <div class="user-location">${location}</div>
+                        <div class="rating">
+                            ${'<i class="fas fa-star"></i>'.repeat(rating)}
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-text">${text}</p>
+            `;
+            
+            testimonialsGrid.prepend(newTestimonial);
+            alert('شكرًا لك! تم نشر تقييمك بنجاح.');
+        }
+
+        // مسح الحقول
+        function clearForm() {
+            document.getElementById('reviewForm').reset();
+            stars.forEach(star => {
+                star.classList.remove('active', 'fas');
+                star.classList.add('far');
+            });
+            currentRating = 0;
+            document.getElementById('selectedRating').value = '0';
+            hideAllErrors();
+        }
+
+        // إدارة الأخطاء
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        function hideAllErrors() {
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.style.display = 'none';
+            });
+        }
+    </script>
+</body>
+</html>

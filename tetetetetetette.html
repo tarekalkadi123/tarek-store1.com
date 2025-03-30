@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طارق - متجر المواقع الجاهزة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+	html{background-color: blue}
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+            --success-color: #4cc9f0;
+            --danger-color: #f72585;
+            --warning-color: #f8961e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            color: var(--accent-color);
+            margin-left: 0.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        
+        nav ul li a i {
+            margin-right: 0.3rem;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), 
+                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 6rem 1rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 0.5rem;
+            transition: all 0.3s;
+            border: 2px solid var(--accent-color);
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border-color: white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--dark-color);
+        }
+        
+        .products {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        
+        .filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filter-btn {
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            padding: 0.6rem 1.5rem;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--danger-color);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .product-image-container {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+		div{width 40px}
+        
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 1.8rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark-color);
+        }
+        
+        .product-price {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .product-price .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1rem;
+            margin-right: 0.5rem;
+        }
+        
+        .product-description {
+            color: #666;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        .product-features {
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-features li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .product-features li i {
+            color: var(--success-color);
+            margin-left: 0.5rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+        
+        .btn-sm {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+        }
+        
+        .btn-dark {
+            background-color: var(--dark-color);
+            border-color: var(--dark-color);
+        }
+        
+        .btn-dark:hover {
+            background-color: transparent;
+            color: var(--dark-color);
+        }
+        
+        .testimonials {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        
+        .testimonials .section-title h2 {
+            color: white;
+        }
+        
+        .testimonials .section-title h2::after {
+            background-color: var(--accent-color);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background-color: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            text-align: right;
+            transition: transform 0.3s;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .testimonial-text::before {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(255,255,255,0.1);
+            position: absolute;
+            top: -1.5rem;
+            right: -0.5rem;
+            font-family: serif;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+            border: 2px solid var(--accent-color);
+        }
+        
+        .author-info {
+            text-align: right;
+        }
+        
+        .author-name {
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+        }
+        
+        .author-title {
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+        
+        .rating {
+            color: var(--warning-color);
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .features {
+            padding: 5rem 2rem;
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            background-color: var(--light-color);
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .feature-description {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .contact {
+            padding: 5rem 2rem;
+            background-color: var(--light-color);
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-left: 1rem;
+        }
+        
+        .contact-text h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .contact-text p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .contact-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .payment-content {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--danger-color);
+        }
+        
+        .payment-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .payment-header i {
+            font-size: 3rem;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+        }
+        
+        .payment-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .payment-details {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--light-color);
+            border-radius: 8px;
+        }
+        
+        .payment-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .payment-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .payment-item .label {
+            color: #666;
+        }
+        
+        .payment-item .value {
+            font-weight: bold;
+        }
+        
+        .payment-item .total {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+        
+        .payment-methods {
+            margin-bottom: 2rem;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(72, 149, 239, 0.05);
+        }
+        
+        .payment-method.selected {
+            border-color: var(--accent-color);
+            background-color: rgba(72, 149, 239, 0.1);
+        }
+        
+        .payment-method img {
+            width: 60px;
+            margin-left: 1rem;
+        }
+        
+        .payment-method-info {
+            flex-grow: 1;
+        }
+        
+        .payment-method-title {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .payment-method-desc {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .payment-footer {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .payment-footer p {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 1rem;
+        }
+        
+        .success-message {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .success-message i {
+            font-size: 5rem;
+            color: var(--success-color);
+            margin-bottom: 1.5rem;
+            animation: bounce 1s;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        .success-message h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .success-message p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .footer-links a i {
+            margin-left: 0.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                display: block;
+                margin: 0.5rem auto;
+                width: 80%;
+                max-width: 250px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .payment-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-globe"></i>
+            <span>طارق</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="#products"><i class="fas fa-store"></i> المتجر</a></li>
+                <li><a href="#features"><i class="fas fa-star"></i> المميزات</a></li>
+                <li><a href="opinion.html"><i class="fas fa-comments"></i> آراء العملاء</a></li>
+                <li><a href="cntact.html"><i class="fas fa-envelope"></i> اتصل بنا</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h1>مواقع ويب جاهزة بأسعار تناسب الجميع</h1>
+        <p>تصميمات احترافية جاهزة للاستخدام فوراً، اختر ما يناسبك وابدأ مشروعك الإلكتروني خلال دقائق</p>
+        <a href="#products" class="btn"><i class="fas fa-shopping-cart"></i> تصفح المتجر</a>
+        <a href="#features" class="btn btn-outline"><i class="fas fa-info-circle"></i> اكتشف المزيد</a>
+    </section>
+    
+    <section class="products" id="products">
+        <div class="section-title">
+            <h2>تصفح مواقعنا الجاهزة</h2>
+        </div>
+        
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">الكل</button>
+            <button class="filter-btn" data-filter="50-100">جيد</button>
+            <button class="filter-btn" data-filter="101-150">ممتاز</button>
+        
+        </div>
+        
+        <div class="products-grid">
+            <!-- موقع شخصي -->
+            <div class="product-card" data-price="50-100">
+                <div class="product-badge">الأكثر مبيعاً</div>
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="موقع شخصي" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">موقع شخصي احترافي</h3>
+                    <div class="product-price">
+                        <span class="old-price">FREE</span>
+                        
+                    </div>
+                    <p class="product-description">موقع شخصي متكامل لعرض سيرتك الذاتية، أعمالك وإنجازاتك. يتضمن معرض أعمال ونموذج تواصل.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> تصميم متجاوب</li>
+                        <li><i class="fas fa-check"></i> إدارة محتوى سهلة</li>
+                        <li><i class="fas fa-check"></i> نموذج تواصل</li>
+                    </ul>
+                    <div class="product-actions">
+                        <button class="btn btn-sm buy-btn" data-product="موقع شخصي احترافي" data-price="0" data-old-price="0"><i class="fas fa-shopping-cart"></i> شراء الآن</button>
+                        <button class="btn btn-sm btn-dark"><i class="fas fa-info-circle"></i> التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- موقع أعمال صغير -->
+            <div class="product-card" data-price="50-100">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="موقع أعمال" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">موقع أعمال صغير</h3>
+                    <div class="product-price">FREE</div>
+                    <p class="product-description">مثالي للشركات الصغيرة والمحلات التجارية. يتضمن صفحات عن الشركة، الخدمات، معرض أعمال وتواصل.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> 5 صفحات رئيسية</li>
+                        <li><i class="fas fa-check"></i> معرض أعمال</li>
+                        <li><i class="fas fa-check"></i> نموذج تواصل</li>
+                    </ul>
+                    <div class="product-actions">
+                        <button class="btn btn-sm buy-btn" data-product="موقع أعمال صغير" data-price="0"><i class="fas fa-shopping-cart"></i> شراء الآن</button>
+                        <button class="btn btn-sm btn-dark"><i class="fas fa-info-circle"></i> التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- موقع متجر إلكتروني -->
+            <div class="product-card" data-price="0">
+                <div class="product-badge">عرض خاص</div>
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="متجر إلكتروني" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">موقع متجر إلكتروني</h3>
+                    <div class="product-price">FREE</div>
+                    <p class="product-description">متجر إلكتروني كامل مع سلة شراء، نظام دفع، وإدارة منتجات. مثالي لبدء تجارتك الإلكترونية.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> سلة شراء متكاملة</li>
+                        <li><i class="fas fa-check"></i> لوحة تحكم للمنتجات</li>
+                        <li><i class="fas fa-check"></i> متوافق مع أنظمة الدفع</li>
+                    </ul>
+                    <div class="product-actions">
+                        <button class="btn btn-sm buy-btn" data-product="موقع متجر إلكتروني" data-price="0"><i class="fas fa-shopping-cart"></i> شراء الآن</button>
+                        <button class="btn btn-sm btn-dark"><i class="fas fa-info-circle"></i> التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- موقع شركة -->
+            <div class="product-card" data-price="101-150">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="موقع شركة" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">موقع شركة احترافي</h3>
+                    <div class="product-price">FREE</div>
+                    <p class="product-description">موقع متكامل للشركات متوسطة الحجم. يتضمن صفحات الخدمات، فريق العمل، المدونة ونموذج تواصل متقدم.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> 10 صفحات رئيسية</li>
+                        <li><i class="fas fa-check"></i> نظام مدونة</li>
+                        <li><i class="fas fa-check"></i> معرض أعمال متقدم</li>
+                    </ul>
+                    <div class="product-actions">
+                        <button class="btn btn-sm buy-btn" data-product="موقع شركة احترافي" data-price="0"><i class="fas fa-shopping-cart"></i> شراء الآن</button>
+                        <button class="btn btn-sm btn-dark"><i class="fas fa-info-circle"></i> التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- موقع احترافي -->
+            <div class="product-card" data-price="0">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="موقع احترافي" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">موقع احترافي متكامل</h3>
+                    <div class="product-price">FREE</div>
+                    <p class="product-description">موقع احترافي متكامل مع نظام إدارة محتوى، مدونة، معرض أعمال متعدد الأقسام ونماذج متقدمة.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> نظام إدارة محتوى</li>
+                        <li><i class="fas fa-check"></i> صفحات لا نهائية</li>
+                        <li><i class="fas fa-check"></i> دعم فني لمدة عام</li>
+                    </ul>
+                    <div class="product-actions">
+                        <button class="btn btn-sm buy-btn" data-product="موقع احترافي متكامل" data-price="0"><i class="fas fa-shopping-cart"></i> شراء الآن</button>
+                        <button class="btn btn-sm btn-dark"><i class="fas fa-info-circle"></i> التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- موقع مطعم -->
+            <div class="product-card" data-price="0">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="موقع مطعم" class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">موقع مطعم أو مقهى</h3>
+                    <div class="product-price">FREE</div>
+                    <p class="product-description">موقع جذاب للمطاعم والمقاهي مع عرض القائمة، معرض الصور، نظام حجوزات وتقييمات.</p>
+                    <ul class="product-features">
+                        <li><i class="fas fa-check"></i> عرض قائمة الطعام</li>
+                        <li><i class="fas fa-check"></i> نظام حجوزات</li>
+                        <li><i class="fas fa-check"></i> معرض صور تفاعلي</li>
+                    </ul>
+                    <div class="product-actions">
+                        <button class="btn btn-sm buy-btn" data-product="موقع مطعم أو مقهى" data-price="0"><i class="fas fa-shopping-cart"></i> شراء الآن</button>
+                        <button class="btn btn-sm btn-dark"><i class="fas fa-info-circle"></i> التفاصيل</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>لماذا تختار طارق؟</h2>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="feature-title">سرعة التنفيذ</h3>
+                
+                <p class="feature-description">احصل على موقعك الجاهز خلال 24 ساعة فقط بعد تأكيد الطلب، لا ح
+                </div>
+                <h3 class="feature-title">دعم فني متميز</h3>
+                <p class="feature-description">فريق دعم فني متاح 24/7 لمساعدتك في أي استفسارات أو مشكلات تواجهك خلال استخدام الموقع.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- أضف هذا الجزء قبل إغلاق body -->
+    <div class="payment-modal" id="paymentModal">
+        
+        <div class="payment-content">
+            <span class="close-modal">&times;</span>
+            <div class="payment-header">
+                <i class="fas fa-lock"></i>
+                <h3>إتمام عملية الشراء</h3>
+                <p>املأ بيانات الدفع لإكمال العملية</p>
+            </div>
+            
+            <div class="payment-details">
+                <div class="payment-item">
+                    <span class="label">المنتج:</span>
+                    <span class="value" id="productName">-</span>
+                </div>
+                <div class="payment-item">
+                    <span class="label">السعر:</span>
+                    <span class="value" id="productPrice">-</span>
+                </div>
+                <div class="payment-item total">
+                    <span class="label">المجموع:</span>
+                    <span class="value" id="totalPrice">-</span>
+                </div>
+            </div>
+
+            <div class="payment-methods">
+                <div class="payment-method" data-method="visa">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="فيزا">
+                    <div class="payment-method-info">
+                        <div class="payment-method-title">بطاقة ائتمان/مدين</div>
+                        <div class="payment-method-desc">فيزا، ماستركارد، أمريكان إكسبريس</div>
+                    </div>
+                </div>
+                
+                <div class="payment-method" data-method="mada">
+                    
+                    <div class="payment-method-info">
+                        <div class="payment-method-title">اخرى</div>
+                        <div class="payment-method-desc"> </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="payment-footer">
+                <button class="btn" id="confirmPayment">تأكيد الدفع</button>
+                <p>نضمن حماية بياناتك وعدم مشاركتها مع أي طرف ثالث</p>
+            </div>
+        </div>
+        
+    </div>
+    
+
+    <script>
+        // دالة لفتح نافذة الدفع
+        function openPaymentModal(productName, price) {
+            const modal = document.getElementById('paymentModal');
+            document.getElementById('productName').textContent = productName;
+            document.getElementById('productPrice').textContent = `${price}$`;
+            document.getElementById('totalPrice').textContent = `${price}$`;
+            modal.style.display = 'flex';
+        }
+
+        // دالة لإغلاق النافذة
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        // أحداث الفتح والإغلاق
+        document.querySelectorAll('.buy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const product = button.dataset.product;
+                const price = button.dataset.price;
+                openPaymentModal(product, price);
+            });
+        });
+
+        document.querySelector('.close-modal').addEventListener('click', closePaymentModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('paymentModal')) {
+                closePaymentModal();
+            }
+        });
+
+        // اختيار طريقة الدفع
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', () => {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                method.classList.add('selected');
+            });
+        });
+        
+
+        // تأكيد الدفع
+        document.getElementById('confirmPayment').addEventListener('click', () => {
+            const selectedMethod = document.querySelector('.payment-method.selected');
+            if (!selectedMethod) {
+                alert('الرجاء اختيار طريقة دفع');
+                return;
+            }
+
+            // عرض رسالة النجاح
+            const modalContent = document.querySelector('.payment-content');
+            modalContent.innerHTML = `
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>تمت العملية بنجاح!</h3>
+                    <p>شكرًا لشرائك، سيتم إرسال تفاصيل الموقع إلى بريدك الإلكتروني خلال 24 ساعة</p>
+                    <button class="btn" onclick="closePaymentModal()">موافق</button>
+                </div>
+            `;
+        });
+
+        // فلترة المنتجات حسب السعر
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.dataset.filter;
+                
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                document.querySelectorAll('.product-card').forEach(card => {
+                    const priceRange = card.dataset.price;
+                    if (filter === 'all' || priceRange === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
